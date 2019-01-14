@@ -1,5 +1,4 @@
-﻿
-namespace TfsMergeCandidates.Output
+﻿namespace TfsMergeCandidates.Output
 {
     public enum MergeOutputType
     {

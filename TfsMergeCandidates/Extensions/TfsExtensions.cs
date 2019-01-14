@@ -6,11 +6,11 @@ namespace TfsMergeCandidates.Extensions
     {
         public static string[] ToDataGridStringArray(this MergeCandidate candidate)
         {
-            string comment = candidate.Comment ?? String.Empty;
+            string comment = candidate.Comment ?? string.Empty;
             comment = comment.Length > 100 ? comment.Substring(0, 100) + "..." : comment;
 
-            return new string[] 
-            { 
+            return new string[]
+            {
                 candidate.ChangesetId.ToString(),
                 candidate.Committer,
                 candidate.CheckinDate.ToString(),

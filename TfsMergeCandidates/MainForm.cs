@@ -28,12 +28,13 @@ namespace TfsMergeCandidates
             // Load default settings.
             txtTfsServerUrl.Text = AppConfig.DefaultTFSServer;
 
-            SetState(false, 
-				comboProject, 
-				comboSourceBranch, 
-				comboTargetBranch, 
-				lblSourceBranch, 
-				lblTargetBranch, 
+            SetState(
+				false,
+				comboProject,
+				comboSourceBranch,
+				comboTargetBranch,
+				lblSourceBranch,
+				lblTargetBranch,
 				lblProject,
 				btnGetMerges,
 				mergeGrid,
@@ -53,15 +54,19 @@ namespace TfsMergeCandidates
             _outputter = GetOutputter(MergeOutputType.Html);
         }
 
-        #region Events
+		#region Events
 
-        private void txtTfsServerUrl_KeyUp(object sender, KeyEventArgs e)
-        {
-            btnTfsConnect.Enabled = !String.IsNullOrWhiteSpace(txtTfsServerUrl.Text);
+#pragma warning disable SA1300 // Element must begin with upper-case letter
+
+		private void txtTfsServerUrl_KeyUp(object sender, KeyEventArgs e)
+		{
+            btnTfsConnect.Enabled = !string.IsNullOrWhiteSpace(txtTfsServerUrl.Text);
 
             if (btnTfsConnect.Enabled && e.KeyCode == Keys.Enter)
-                Connect(sender, e);
-        }
+			{
+				Connect(sender, e);
+			}
+		}
 
         private void Connect(object sender, EventArgs e)
         {
@@ -99,9 +104,9 @@ namespace TfsMergeCandidates
                                                                  x.Properties.RootItem.Item.Contains(comboProject.SelectedItem.ToString()));
 
                 activeBranches.ToList().ForEach(b =>
-                { 
+                {
                     comboSourceBranch.Items.Add(b.Properties.RootItem.Item);
-                    comboTargetBranch.Items.Add(b.Properties.RootItem.Item); 
+                    comboTargetBranch.Items.Add(b.Properties.RootItem.Item);
                 });
             }
         }
@@ -222,9 +227,11 @@ namespace TfsMergeCandidates
 			}
         }
 
-        #endregion
-        
-        private void SetState(bool enabled, params Control[] controls) 
+#pragma warning restore SA1300 // Element must begin with upper-case letter
+
+		#endregion
+
+		private void SetState(bool enabled, params Control[] controls)
         {
             controls.ToList().ForEach(x => x.Enabled = enabled);
         }
@@ -256,7 +263,7 @@ namespace TfsMergeCandidates
 		private async Task<Microsoft.TeamFoundation.VersionControl.Client.MergeCandidate[]> QueryMerges(
 			string sourceBranch, string targetBranch)
 		{
-			return await Task.Run(() => 
+			return await Task.Run(() =>
 			{
 				return _versionControlServer.GetMergeCandidates(sourceBranch, targetBranch, RecursionType.Full);
 			});
