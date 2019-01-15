@@ -1,5 +1,5 @@
 # TFS Merge Candidates
-A basic Windows application which identifies TFS change sets that can be merged between two branches.
+A basic Windows application which identifies TFS change sets that can be merged between two branches. (For projects using TFVC source control only).
 
 ## Usage
 
